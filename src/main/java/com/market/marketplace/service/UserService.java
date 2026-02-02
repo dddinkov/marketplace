@@ -22,7 +22,7 @@ public class UserService {
     public User registerUser(RegisterRequest registerRequest) {
         String email = registerRequest.email();
         if (userRepository.existsByEmail(email)) {
-            throw new EmailAlreadyUsedException("Email is already registered");
+            throw new EmailAlreadyUsedException();
         }
 
         String passwordHash = passwordEncoder.encode(registerRequest.password());

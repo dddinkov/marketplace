@@ -22,12 +22,6 @@ public class UserController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping
-    public ResponseEntity<User> registerUser(@RequestBody RegisterRequest request) {
-        User savedUser = userService.registerUser(request);
-        return ResponseEntity.ok(savedUser);
-    }
-
     @PutMapping("/{id}/password")
     public ResponseEntity<User> updatePassword(
             @PathVariable Long id,

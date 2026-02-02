@@ -1,0 +1,67 @@
+import { useState } from "react";
+import { loginUser } from "../api"; // make sure this is the function we wrote earlier
+import "../styles/Login.css"; // optional styling
+
+export default function Login() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [success, setSuccess] = useState(false);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError("");
+        setSuccess(false);
+        setLoading(true);
+
+        try {
+            const data = await loginUser(email, password);
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("email", data.email);
+            setSuccess(true);
+            setEmail("");
+            setPassword("");
+        } catch (err) {
+            setError(err.message || "Login failed");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return (
+        <div className="login-container">
+            <h2>Login</h2>
+            {success && <p style={{ color: "green" }}>Login successful!</p>}
+            {error && <p style={{ color: "red" }}>{error}</p>}
+
+            <form onSubmit={handleSubmit}>
+                <label htmlFor="email">Email</label>
+                <input
+                    id="email"
+                    type="email"
+                    placeholder="your.email@example.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    disabled={loading}
+                />
+
+                <label htmlFor="password">Password</label>
+                <input
+                    id="password"
+                    type="password"
+                    placeholder="********"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    disabled={loading}
+                />
+
+                <button type="submit" disabled={loading}>
+                    {loading ? "Logging in..." : "Login"}
+                </button>
+            </form>
+        </div>
+    );
+}

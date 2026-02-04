@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:5173")
 @NoArgsConstructor
 @Entity
 @Getter

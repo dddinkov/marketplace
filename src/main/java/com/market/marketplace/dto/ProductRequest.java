@@ -10,7 +10,5 @@ public record ProductRequest(
         String description,
         @NotNull @Positive
         Double price,
-        String imageUrl,
-        @NotNull
-        Long userId
+        String imageUrl
 ) {}

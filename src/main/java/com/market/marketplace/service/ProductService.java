@@ -8,6 +8,8 @@ import com.market.marketplace.repository.ProductRepository;
 import com.market.marketplace.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
@@ -18,12 +20,15 @@ public class ProductService {
 
     @Transactional
     public Product addProduct(ProductRequest request) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String email = auth.getName();
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(UserNotFoundException::new);
+
         String name = request.name();
         String description = request.description();
         Double price = request.price();
         String imageUrl = request.imageUrl();
-        User user = userRepository.findById(request.userId())
-                .orElseThrow(UserNotFoundException::new);
 
         Product product = new Product();
         product.setName(name);

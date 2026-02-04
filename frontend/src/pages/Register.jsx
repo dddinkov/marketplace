@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { registerUser } from "../api";
+import { registerUser } from "../api/api.js";
 import "../styles/Register.css";
 
 export default function Register() {

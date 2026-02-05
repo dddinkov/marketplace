@@ -37,7 +37,8 @@ public class User implements UserDetails {
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "cart_id", foreignKey = @ForeignKey(name = "fk_user_cart"))
     private Cart cart;
 
     public User(String email, String passwordHash) {
@@ -45,10 +46,10 @@ public class User implements UserDetails {
         this.passwordHash = passwordHash;
     }
 
-    public void createCart() {
+    public Cart createCart() {
         Cart cart = new Cart();
-        cart.setUser(this);
         this.setCart(cart);
+        return cart;
     }
 
     @Override

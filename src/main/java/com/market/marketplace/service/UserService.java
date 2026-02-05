@@ -2,7 +2,9 @@ package com.market.marketplace.service;
 
 import com.market.marketplace.dto.RegisterRequest;
 import com.market.marketplace.exception.EmailAlreadyUsedException;
+import com.market.marketplace.model.Cart;
 import com.market.marketplace.model.User;
+import com.market.marketplace.repository.CartRepository;
 import com.market.marketplace.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +19,7 @@ import java.util.Optional;
 public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
+    private final CartRepository cartRepository;
 
     @Transactional
     public User registerUser(RegisterRequest registerRequest) {
@@ -31,7 +34,8 @@ public class UserService {
         user.setEmail(email);
         user.setPasswordHash(passwordHash);
 
-        user.createCart();
+        Cart cart = user.createCart();
+        cartRepository.save(cart);
 
         return userRepository.save(user);
     }

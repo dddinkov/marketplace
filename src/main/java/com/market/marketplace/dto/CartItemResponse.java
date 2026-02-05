@@ -7,6 +7,7 @@ public record CartItemResponse(
         Long productId,
         String productName,
         Double productPrice,
+        String imageUrl,
         Integer quantity
 ) {
     public static CartItemResponse from(CartItem cartItem) {
@@ -15,6 +16,7 @@ public record CartItemResponse(
                 cartItem.getProduct().getId(),
                 cartItem.getProduct().getName(),
                 cartItem.getProduct().getPrice(),
+                cartItem.getProduct().getImageUrl(),
                 cartItem.getQuantity()
         );
     }

@@ -37,6 +37,9 @@ public class User implements UserDetails {
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
+    @OneToOne(mappedBy = "user")
+    private Cart cart;
+
     public User(String email, String passwordHash) {
         this.email = email;
         this.passwordHash = passwordHash;

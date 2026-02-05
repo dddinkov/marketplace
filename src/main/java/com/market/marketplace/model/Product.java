@@ -1,5 +1,6 @@
 package com.market.marketplace.model;
 
+import com.market.marketplace.dto.ProductRequest;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,4 +32,16 @@ public class Product {
             foreignKey = @ForeignKey(name = "fk_order_user")
     )
     private User user;
+
+    public static Product from(ProductRequest request, User user) {
+        Product product = new Product();
+
+        product.setUser(user);
+        product.setName(request.name());
+        product.setDescription(request.description());
+        product.setPrice(request.price());
+        product.setImageUrl(request.imageUrl());
+
+        return product;
+    }
 }

@@ -8,6 +8,7 @@ import com.market.marketplace.model.User;
 import com.market.marketplace.service.AuthService;
 import com.market.marketplace.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,9 +24,10 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<RegisterResponse> registerUser(@RequestBody RegisterRequest request) {
-        User savedUser = userService.registerUser(request);
-        RegisterResponse response = new RegisterResponse(savedUser.getId(), savedUser.getEmail());
-        return ResponseEntity.ok(response);
+        User user = userService.registerUser(request);
+        RegisterResponse response = RegisterResponse.from(user);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(response);
     }
 
     @PostMapping("/login")

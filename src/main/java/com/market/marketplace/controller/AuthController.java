@@ -4,6 +4,7 @@ import com.market.marketplace.dto.LoginRequest;
 import com.market.marketplace.dto.LoginResponse;
 import com.market.marketplace.dto.RegisterRequest;
 import com.market.marketplace.dto.RegisterResponse;
+import com.market.marketplace.model.Cart;
 import com.market.marketplace.model.User;
 import com.market.marketplace.service.AuthService;
 import com.market.marketplace.service.UserService;
@@ -26,6 +27,7 @@ public class AuthController {
     public ResponseEntity<RegisterResponse> registerUser(@RequestBody RegisterRequest request) {
         User user = userService.registerUser(request);
         RegisterResponse response = RegisterResponse.from(user);
+
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(response);
     }

@@ -31,6 +31,8 @@ public class UserService {
         user.setEmail(email);
         user.setPasswordHash(passwordHash);
 
+        user.createCart();
+
         return userRepository.save(user);
     }
 

@@ -45,6 +45,12 @@ public class User implements UserDetails {
         this.passwordHash = passwordHash;
     }
 
+    public void createCart() {
+        Cart cart = new Cart();
+        cart.setUser(this);
+        this.setCart(cart);
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));

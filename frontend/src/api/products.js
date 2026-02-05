@@ -1,7 +1,7 @@
 import {API_URL} from "./api.js";
 
 export async function addProduct(name, description, price, imageUrl) {
-    const response = await fetch(`${API_URL}/products/add`, {
+    const response = await fetch(`${API_URL}/products`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

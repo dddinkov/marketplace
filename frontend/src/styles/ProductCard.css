@@ -1,0 +1,83 @@
+/* Wrapper for the entire card */
+.product-card {
+    border: 1px solid #e0e0e0; /* Light border around the card */
+    padding: 16px; /* Padding around the content */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow */
+    background-color: #ffffff; /* White background */
+    transition: box-shadow 0.3s ease-in-out; /* Smooth transition for hover effect */
+    max-width: 300px; /* Limit the card width */
+    margin: 16px; /* Space around the card */
+}
+
+.product-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
+}
+
+/* Image Styling */
+.product-card img {
+    max-width: 100%; /* Ensure image scales responsively */
+    height: auto; /* Maintain aspect ratio */
+    width: 100%; /* Ensure image fills the container */
+    max-height: 200px; /* Set a maximum height for the image */
+    object-fit: cover; /* Crop image to cover the area */
+    margin-bottom: 16px; /* Space between the image and text */
+}
+
+/* Product Name Styling */
+.product-card h3 {
+    font-size: 1.25rem; /* Increase font size for product name */
+    font-weight: 700; /* Make the name bold */
+    margin-bottom: 8px; /* Space between name and description */
+    color: #333333; /* Dark text color */
+}
+
+/* Product Description Styling */
+.product-card p {
+    font-size: 1rem; /* Standard font size for description */
+    color: #666666; /* Lighter color for description */
+    margin-bottom: 8px; /* Space between description and price */
+}
+
+/* Price Styling */
+.product-card .price {
+    color: #4caf50; /* Green color for price */
+    font-weight: 600; /* Bold price */
+    margin-bottom: 16px; /* Space between price and button */
+}
+
+/* Button Styling */
+.product-card button {
+    padding: 12px 16px; /* Vertical and horizontal padding */
+    background-color: #007bff; /* Blue background */
+    color: white; /* White text */
+    font-weight: 600; /* Bold text for the button */
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners for the button */
+    cursor: pointer; /* Show pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth hover transition */
+}
+
+.product-card button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+    .product-card {
+        max-width: 100%; /* Take full width on small screens */
+        padding: 12px; /* Reduce padding on small screens */
+    }
+
+    .product-card h3 {
+        font-size: 1rem; /* Smaller font size for name */
+    }
+
+    .product-card p {
+        font-size: 0.9rem; /* Smaller font size for description */
+    }
+
+    .product-card button {
+        padding: 10px 14px; /* Slightly smaller button */
+    }
+}

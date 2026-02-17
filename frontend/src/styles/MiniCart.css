@@ -1,0 +1,23 @@
+.mini-cart-container img {
+    filter: brightness(0) invert(1);
+}
+
+.mini-cart-container img:hover {
+    filter: brightness(0) invert(0.9);
+}
+
+.mini-cart-container span {
+    position: absolute;
+    top: 11px;
+    right: -8px;
+    background-color: #666;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+}

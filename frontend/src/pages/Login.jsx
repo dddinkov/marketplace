@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { loginUser } from "../api/api.js"; // make sure this is the function we wrote earlier
-import "../styles/Login.css"; // optional styling
+import "../styles/Login.css";
+import {useNavigate} from "react-router-dom"; // optional styling
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -8,6 +9,8 @@ export default function Login() {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
+
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -22,6 +25,8 @@ export default function Login() {
             setSuccess(true);
             setEmail("");
             setPassword("");
+
+            navigate("/");
         } catch (err) {
             setError(err.message || "Login failed");
         } finally {

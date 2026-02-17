@@ -5,17 +5,39 @@ import ProductAdd from "./pages/ProductAdd"
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import Header from "./pages/Header";
+import MyProfile from "./pages/MyProfile.jsx";
+import ProtectedRoute from "./pages/ProtectedRoute.jsx";
+
+export const routes = [
+    // public routes
+    { path: "/login", element: <Login /> },
+    { path: "/register", element: <Register /> },
+
+    // protected routes
+    { path: "/me", element: <MyProfile />, protected: true },
+    { path: "/", element: <Home />, protected: true },
+    { path: "/cart", element: <Cart />, protected: true },
+    { path: "/product/add", element: <ProductAdd />, protected: true },
+];
 
 export default function App() {
     return (
         <Router>
             <Header />
             <Routes>
-                <Route path="/register" element={<Register />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/product/add" element={<ProductAdd /> } />
-                <Route path="/" element={<Home />} />
-                <Route path="/cart" element={<Cart />} />
+                {routes.map(({ path, element, protected: isProtected }) => (
+                    <Route
+                        key={path}
+                        path={path}
+                        element={
+                            isProtected ? (
+                                <ProtectedRoute>{element}</ProtectedRoute>
+                            ) : (
+                                element
+                            )
+                        }
+                    />
+                ))}
             </Routes>
         </Router>
     );

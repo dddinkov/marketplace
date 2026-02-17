@@ -53,10 +53,20 @@ public class UserService {
     }
 
     @Transactional
-    public Optional<User> updatePassword(Long id, String newPasswordHash) {
+    public Optional<User> updateUser(Long id, String newEmail, String newPassword) {
         return userRepository.findById(id)
                 .map(user -> {
-                    user.setPasswordHash(newPasswordHash);
+                    if (newEmail != null && !newEmail.isBlank() && !newEmail.equals(user.getEmail())) {
+                        if (userRepository.existsByEmail(newEmail)) {
+                            throw new EmailAlreadyUsedException();
+                        }
+                        user.setEmail(newEmail);
+                    }
+
+                    if (newPassword != null && !newPassword.isBlank()) {
+                        user.setPasswordHash(passwordEncoder.encode(newPassword));
+                    }
+
                     return user;
                 });
     }

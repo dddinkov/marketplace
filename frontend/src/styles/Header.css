@@ -1,0 +1,25 @@
+/* Header.css */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #dc3545;
+  border-bottom: 1px solid #c82333;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+header .mini-cart-container {
+  position: relative;
+}
+
+header .link {
+  margin: 8px;
+  color: white;
+}
+
+header .link:hover {
+  color: rgb(214, 164, 164);
+}

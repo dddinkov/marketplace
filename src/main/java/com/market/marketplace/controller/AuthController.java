@@ -3,8 +3,7 @@ package com.market.marketplace.controller;
 import com.market.marketplace.dto.LoginRequest;
 import com.market.marketplace.dto.LoginResponse;
 import com.market.marketplace.dto.RegisterRequest;
-import com.market.marketplace.dto.RegisterResponse;
-import com.market.marketplace.model.Cart;
+import com.market.marketplace.dto.UserResponse;
 import com.market.marketplace.model.User;
 import com.market.marketplace.service.AuthService;
 import com.market.marketplace.service.UserService;
@@ -24,9 +23,9 @@ public class AuthController {
     private final UserService userService;
 
     @PostMapping("/register")
-    public ResponseEntity<RegisterResponse> registerUser(@RequestBody RegisterRequest request) {
+    public ResponseEntity<UserResponse> registerUser(@RequestBody RegisterRequest request) {
         User user = userService.registerUser(request);
-        RegisterResponse response = RegisterResponse.from(user);
+        UserResponse response = UserResponse.from(user);
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(response);

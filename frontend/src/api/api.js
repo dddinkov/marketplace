@@ -55,3 +55,42 @@ export async function updatePassword(userId, newPassword) {
     }
     return response.json();
 }
+
+export async function logout() {
+    localStorage.removeItem("token");
+}
+
+function getAuthHeaders() {
+    const token = localStorage.getItem("token");
+    return {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+    };
+}
+
+export async function fetchCurrentUser() {
+    const res = await fetch(`${API_URL}/users/me`, {
+        method: "GET",
+        headers: getAuthHeaders(),
+    });
+
+    if(!res.ok) {
+        throw new Error("Failed to fetch current user");
+    }
+
+    return res.json();
+}
+
+export async function updateUser(data) {
+    const res = await fetch (`${API_URL}/users/me`, {
+        method: "PUT",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(data)
+});
+    if (!res.ok) {
+        const errData = await res.json();
+        throw new Error(errData.message || "Failed to update profile");
+    }
+
+    return res.json();
+}

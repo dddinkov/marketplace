@@ -1,26 +1,36 @@
 import React, { useState, useEffect } from "react";
-import {fetchCart} from "../api/cart.js";
+import {fetchCart, deleteFromCart} from "../api/cart.js";
 import "../styles/Cart.css";
 
-export default function Cart({ onRemoveFromCart }) {
+export default function Cart() {
     const [cart, setCart] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const loadCart = async () => {
-            try {
-                const data = await fetchCart();
-                setCart(data);
-            } catch (err) {
-                setError(err.message);
-            } finally {
-                setLoading(false);
-            }
-        };
+    const loadCart = async () => {
+        try {
+            const data = await fetchCart();
+            setCart(data);
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+    };
 
-        loadCart();
+    useEffect(() => {
+        loadCart()
     }, []);
+
+    const handleDelete = async (cartItemId) => {
+        try {
+            await deleteFromCart(cartItemId);
+
+            loadCart()
+        } catch (err) {
+            setError(err.message);
+        }
+    };
 
     if (loading) {
         return <div>Loading...</div>;
@@ -55,7 +65,7 @@ export default function Cart({ onRemoveFromCart }) {
                             <h4>{item.productName}</h4>
                             <p>Quantity: {item.quantity}</p>
                             <p>Price: ${item.productPrice}</p>
-                            <button onClick={() => onRemoveFromCart(item.product.id)}>
+                            <button onClick={() => handleDelete(item.id)}>
                                 Remove
                             </button>
                         </div>

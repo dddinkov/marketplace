@@ -10,11 +10,13 @@ export default function Header({ cartItemCount = 0 }) {
         Marketplace
       </div>
       <nav>
-        <Link className="link" to="/">Home</Link>
-        
-        <Link className="link" to="/me">My Profile</Link>
+          <Link className="link" to="/">Home</Link>
+
+          <Link className="link" to="/me">My Profile</Link>
 
           <Link className="link" to="/product/add">Add Product</Link>
+
+          <Link className="link" to="/category/add">Add Category</Link>
       </nav>
       <div className="mini-cart-container">
         <MiniCart />

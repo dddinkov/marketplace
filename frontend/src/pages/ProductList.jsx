@@ -17,7 +17,6 @@ export default function ProductList() {
     const handleAddToCart = async (productId, quantity) => {
         try {
             const result = await addToCart(productId, quantity);
-            console.log("Added to cart:", result);
             alert("Product added to cart!");
         } catch (err) {
             console.error(err);

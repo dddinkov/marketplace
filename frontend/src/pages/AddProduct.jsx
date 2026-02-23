@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { addProduct } from "../api/products.js";
-import "../styles/ProductAdd.css";
+import "../styles/AddProduct.css";
 
 export default function ProductForm() {
     const [name, setName] = useState("");

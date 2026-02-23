@@ -1,9 +1,16 @@
 import React from "react";
+import {addToCart} from "../api/cart.js";
+import {triggerCartUpdate} from "../events/cartEvent";
 import "../styles/ProductCard.css";
 
-export default function ProductCard({ product, token, onAddToCart }) {
-    const handleAdd = () => {
-        onAddToCart(product.id, 1);
+export default function ProductCard({ product }) {
+    const handleAdd = async () => {
+        try {
+            await addToCart(product.id, 1);
+            triggerCartUpdate();
+        } catch (err) {
+            console.error("Failed to add to cart:", err);
+        }
     };
 
     return (

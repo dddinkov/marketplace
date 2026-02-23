@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {fetchCart, deleteFromCart} from "../api/cart.js";
+import {triggerCartUpdate} from "../events/cartEvent.js";
 import "../styles/Cart.css";
 
 export default function Cart() {
@@ -27,6 +28,7 @@ export default function Cart() {
             await deleteFromCart(cartItemId);
 
             loadCart()
+            triggerCartUpdate()
         } catch (err) {
             setError(err.message);
         }

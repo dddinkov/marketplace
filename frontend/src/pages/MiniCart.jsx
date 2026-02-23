@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { fetchCart } from "../api/cart";
+import {cartEvent} from "../events/cartEvent.js";
 import "../styles/MiniCart.css";
 import { Link } from "react-router-dom";
 
@@ -15,6 +16,10 @@ export default function MiniCart() {
         };
 
         loadCart();
+
+        window.addEventListener("cartUpdated", loadCart);
+
+        return () => window.removeEventListener("cartUpdated", loadCart);
     }, []);
 
     return (

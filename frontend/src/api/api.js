@@ -31,11 +31,6 @@ export async function  loginUser(email, password) {
 
     if (!response.ok) {
         const message = await response.text();
-        if (response.status === 401) {
-            alert(`Login failed: ${message}`);
-        } else {
-            alert(`Login failed`);
-        }
         throw new Error(message || "Login failed");
     }
 

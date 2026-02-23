@@ -1,0 +1,12 @@
+form {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #c82333;
+    padding: 15px;
+    border-radius: 25px;
+}
+
+form label {
+    display: flex;
+    flex-direction: column;
+}

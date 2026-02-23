@@ -1,13 +1,17 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchCurrentUser, updateUser, logout } from "../api/api.js";
+import { fetchCurrentUser, updateUser, logout, loginUser } from "../api/api.js";
+import "../styles/MyProfile.css";
 
 export default function MyProfile() {
     const navigate = useNavigate();
 
     const [user, setUser] = useState(null);
     const [email, setEmail] = useState("");
+    const [oldPassword, setOldPassword] = useState("");
     const [password, setPassword] = useState("");
+    const [repeatPassword, setRepeatPassword] = useState("");
+    const [createdAt, setCreatedAt] = useState("")
 
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState("");
@@ -19,6 +23,7 @@ export default function MyProfile() {
                 const data = await fetchCurrentUser();
                 setUser(data);
                 setEmail(data.email);
+                setCreatedAt(data.createdAt);
             } catch (err) {
                 setError("Failed to load user data. Please login again.");
             }
@@ -38,10 +43,17 @@ export default function MyProfile() {
         setError("");
 
         try {
+            if (password != repeatPassword) {
+                throw new Error("Passwords do not match");
+            }
+
+            const loginResponse = await loginUser(user.email, oldPassword);
+
             const updated = await updateUser({ email, password });
             setUser(updated);
             setSuccess("Profile updated successfully!");
             setPassword("");
+            setRepeatPassword("");
 
             handleLogout();
         } catch (err) {
@@ -61,7 +73,7 @@ export default function MyProfile() {
 
             <form onSubmit={handleUpdate}>
                 <label>
-                    Email:
+                    Email
                     <input
                         type="email"
                         value={email}
@@ -72,11 +84,33 @@ export default function MyProfile() {
                 </label>
 
                 <label>
-                    New Password:
+                    Old Password
+                    <input
+                        type="password"
+                        value={oldPassword}
+                        onChange={(e) => setOldPassword(e.target.value)}
+                        placeholder="Enter your old password"
+                        disabled={loading}
+                    />
+                </label>
+
+                <label>
+                    New Password
                     <input
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Leave blank to keep current password"
+                        disabled={loading}
+                    />
+                </label>
+
+                <label>
+                    Repeat New Password
+                    <input
+                        type="password"
+                        value={repeatPassword}
+                        onChange={(e) => setRepeatPassword(e.target.value)}
                         placeholder="Leave blank to keep current password"
                         disabled={loading}
                     />

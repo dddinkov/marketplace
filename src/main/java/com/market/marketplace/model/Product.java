@@ -28,11 +28,19 @@ public class Product {
     @JoinColumn(
             name = "user_id",
             nullable = false,
-            foreignKey = @ForeignKey(name = "fk_order_user")
+            foreignKey = @ForeignKey(name = "fk_product_user")
     )
     private User user;
 
-    public static Product from(ProductRequest request, User user) {
+    @ManyToOne
+    @JoinColumn(
+            name = "category_id",
+            nullable = false,
+            foreignKey = @ForeignKey(name = "fk_product_category")
+    )
+    private Category category;
+
+    public static Product from(ProductRequest request, User user, Category category) {
         Product product = new Product();
 
         product.setUser(user);
@@ -40,6 +48,7 @@ public class Product {
         product.setDescription(request.description());
         product.setPrice(request.price());
         product.setImageUrl(request.imageUrl());
+        product.setCategory(category);
 
         return product;
     }

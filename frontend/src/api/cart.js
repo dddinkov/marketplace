@@ -36,3 +36,20 @@ export async function fetchCart() {
 
     return data;
 }
+
+export async function deleteFromCart(itemId) {
+    const response = await fetch(`${API_URL}/cart/items/delete`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+        },
+        body: JSON.stringify({
+            cartItemId: itemId
+        })
+    });
+
+    if (!response.ok) {
+        throw new Error("Failed to delete cart item");
+    }
+}

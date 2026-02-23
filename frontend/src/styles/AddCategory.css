@@ -1,0 +1,76 @@
+:root {
+    /* Backgrounds */
+    --color-bg-primary: #233142;     /* основен фон на контейнера */
+    --color-bg-input: #2e3a52;       /* фон на инпутите */
+    --color-bg-button: var(--color-primary); /* фон на бутона */
+
+    /* Borders */
+    --color-border-primary: #455d7a;
+    --color-border-input: #5a728f;
+
+    /* Text */
+    --color-text-primary: #e3e3e3;    /* основен текст (малко по-светъл от border) */
+    --color-text-muted: #7a8ba6;      /* по-слабо видим текст, подсказки */
+    --color-text-placeholder: #6b7a95; /* цвят за placeholder */
+
+    /* Buttons */
+    --color-primary: #f95959;
+    --color-primary-hover: #ff6e6e;
+
+    /* Errors */
+    --color-error: #dc2626;
+}
+
+
+
+.category-form-container {
+    max-width: 400px;
+    margin: 60px auto;
+    padding: 24px;
+    border: 1px solid var(--color-border-primary);
+    border-radius: 8px;
+    background: var(--color-bg-primary);
+    color: var(--color-text-primary);
+}
+
+.category-form-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.category-form-container h2 {
+    text-align: center;
+    margin-bottom: 16px;
+    color: var(--color-text-primary);
+}
+
+.category-form-container input,
+.category-form-container textarea {
+    width: 90%;
+    padding: 8px;
+    font-size: 16px;
+    margin-bottom: 15px;
+    background-color: var(--color-bg-input);
+    border: 1px solid var(--color-border-input);
+    color: var(--color-text-primary);
+    border-radius: 4px;
+}
+
+.category-form-container input::placeholder {
+    color: var(--color-text-placeholder);
+}
+
+.category-form-container input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 5px var(--color-primary);
+}
+
+.category-form-container button {
+    width: 40%;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: var(--color-primary);
+}

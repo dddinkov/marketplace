@@ -1,12 +1,13 @@
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import ProductAdd from "./pages/ProductAdd"
+import AddProduct from "./pages/AddProduct.jsx"
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import Header from "./pages/Header";
 import MyProfile from "./pages/MyProfile.jsx";
 import ProtectedRoute from "./pages/ProtectedRoute.jsx";
+import AddCategory from "./pages/AddCategory.jsx";
 
 export const routes = [
     // public routes
@@ -17,7 +18,8 @@ export const routes = [
     { path: "/me", element: <MyProfile />, protected: true },
     { path: "/", element: <Home />, protected: true },
     { path: "/cart", element: <Cart />, protected: true },
-    { path: "/product/add", element: <ProductAdd />, protected: true },
+    { path: "/product/add", element: <AddProduct />, protected: true },
+    { path: "/category/add", element: <AddCategory />}
 ];
 
 export default function App() {

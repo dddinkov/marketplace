@@ -1,9 +1,22 @@
 export const API_URL = "http://localhost:8080";
 
+export function headers() {
+    return {
+        "Content-Type": "application/json",
+    };
+}
+
+export function authHeaders() {
+    return {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${localStorage.getItem("token")}`
+    };
+}
+
 export async function registerUser(email, password) {
     const response = await fetch(`${API_URL}/auth/register`, {
         method: "POST",
-        headers: {"Content-Type": "application/json" },
+        headers: authHeaders(),
         body: JSON.stringify({email, password})
     });
 
@@ -25,7 +38,7 @@ export async function registerUser(email, password) {
 export async function  loginUser(email, password) {
     const response = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
-        headers: {"Content-Type": "application/json" },
+        headers: headers(),
         body: JSON.stringify({email, password})
     });
 
@@ -40,7 +53,7 @@ export async function  loginUser(email, password) {
 export async function updatePassword(userId, newPassword) {
     const response = await fetch(`{API_URL}/users/${userId}`, {
         method: "PUT",
-        headers: {"Content-Type": "application/json" },
+        headers: headers(),
         body: JSON.stringify({passwordHash: newPassword})
     });
     return response.json();
@@ -55,18 +68,10 @@ export async function logout() {
     localStorage.removeItem("token");
 }
 
-function getAuthHeaders() {
-    const token = localStorage.getItem("token");
-    return {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-    };
-}
-
 export async function fetchCurrentUser() {
     const res = await fetch(`${API_URL}/users/me`, {
         method: "GET",
-        headers: getAuthHeaders(),
+        headers: authHeaders(),
     });
 
     if(!res.ok) {
@@ -79,7 +84,7 @@ export async function fetchCurrentUser() {
 export async function updateUser(data) {
     const res = await fetch (`${API_URL}/users/me`, {
         method: "PUT",
-        headers: getAuthHeaders(),
+        headers: authHeaders(),
         body: JSON.stringify(data)
 });
     if (!res.ok) {

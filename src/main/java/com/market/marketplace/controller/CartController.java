@@ -1,6 +1,7 @@
 package com.market.marketplace.controller;
 
-import com.market.marketplace.dto.CartItemRequest;
+import com.market.marketplace.dto.DeleteCartItemRequest;
+import com.market.marketplace.dto.UpdateCartItemRequest;
 import com.market.marketplace.dto.CartItemResponse;
 import com.market.marketplace.dto.CartResponse;
 import com.market.marketplace.model.Cart;
@@ -32,7 +33,7 @@ public class CartController {
     }
 
     @PostMapping("/items")
-    public ResponseEntity<CartItemResponse> addItem(@Valid @RequestBody CartItemRequest request) {
+    public ResponseEntity<CartItemResponse> addItem(@Valid @RequestBody UpdateCartItemRequest request) {
         User user = currentUserService.getRequiredUser();
         Cart cart = user.getCart();
 
@@ -44,5 +45,14 @@ public class CartController {
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(response);
+    }
+
+    @DeleteMapping("/items/delete")
+    public ResponseEntity<Void> deleteItem(@Valid @RequestBody DeleteCartItemRequest request) {
+        User user = currentUserService.getRequiredUser();
+
+        cartService.removeCartItem(user, request.cartItemId());
+
+        return ResponseEntity.noContent().build();
     }
 }

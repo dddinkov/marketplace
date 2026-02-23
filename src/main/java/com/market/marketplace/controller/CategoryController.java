@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("category")
@@ -27,5 +30,20 @@ public class CategoryController {
         CategoryResponse response = CategoryResponse.from(category);
 
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<CategoryResponse>> getAllCategories() {
+        List<Category> categories = categoryService.getAllCategories();
+        System.out.println(categories.toString());
+
+        if(categories.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(
+                categories.stream()
+                        .map(CategoryResponse::from)
+                        .collect(Collectors.toList()));
     }
 }

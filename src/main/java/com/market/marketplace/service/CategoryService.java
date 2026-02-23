@@ -7,6 +7,8 @@ import com.market.marketplace.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CategoryService {
@@ -21,5 +23,9 @@ public class CategoryService {
         category = categoryRepository.save(category);
 
         return category;
+    }
+
+    public List<Category> getAllCategories() {
+        return categoryRepository.findAll();
     }
 }

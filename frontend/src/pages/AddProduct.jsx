@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { addProduct } from "../api/products.js";
+import { getCategories} from "../api/category.js";
 import "../styles/AddProduct.css";
 
 export default function ProductForm() {
@@ -7,6 +8,8 @@ export default function ProductForm() {
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
     const [imageUrl, setImageUrl] = useState("");
+    const [categoryId, setCategoryId] = useState(5);
+    const [categories, setCategories] = useState([]);
     const [error, setError] = useState("");
     const [success, setSuccess] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -37,6 +40,24 @@ export default function ProductForm() {
             setLoading(false);
         }
     };
+
+    async function loadCategories() {
+        try {
+            setLoading(true);
+            const data = await getCategories();
+            setCategories(data ?? []);
+            console.log(categories);
+        } catch (err) {
+            setError(err.message);
+            setCategories([]);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        loadCategories();
+    }, [])
 
     return (
         <div className="product-form-container">
@@ -88,6 +109,24 @@ export default function ProductForm() {
                     onChange={(e) => setImageUrl(e.target.value)}
                     disabled={loading}
                 />
+
+                <label htmlFor="category"> Choose Category </label>
+                <select id="category"
+                        value={categoryId}
+                        onChange={(e) => setCategoryId(parseInt(e.target.value))}
+                        required
+                        disabled={loading || categories.length === 0}
+                >
+                    {categories.length === 0 ? (
+                        <option value="" disabled> No categories available </option>
+                    ) : (
+                        categories.map(category => (
+                            <option key={category.id} value={category.id}>
+                                {category.name}
+                            </option>
+                        ))
+                    )}
+                </select>
 
                 <button type="submit" disabled={loading}>
                     {loading ? "Adding..." : "Add Product"}

@@ -25,7 +25,8 @@ export default function ProductForm() {
                 name,
                 description,
                 parseFloat(price),
-                imageUrl
+                imageUrl,
+                categoryId
             );
 
             setSuccess(true);
@@ -33,6 +34,7 @@ export default function ProductForm() {
             setDescription("");
             setPrice("");
             setImageUrl("");
+            setCategoryId(5);
             console.log("Added product:", data);
         } catch (err) {
             setError(err.message || "Failed to add product");

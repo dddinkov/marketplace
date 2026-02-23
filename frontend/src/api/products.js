@@ -1,6 +1,6 @@
 import {API_URL} from "./api.js";
 
-export async function addProduct(name, description, price, imageUrl) {
+export async function addProduct(name, description, price, imageUrl, categoryId) {
     const response = await fetch(`${API_URL}/products`, {
         method: "POST",
         headers: {
@@ -11,7 +11,8 @@ export async function addProduct(name, description, price, imageUrl) {
             name,
             description,
             price,
-            imageUrl
+            imageUrl,
+            categoryId
         })
     });
 

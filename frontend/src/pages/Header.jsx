@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import MiniCart from "./MiniCart";
 import "../styles/Header.css";
 
-export default function Header({ cartItemCount = 0 }) {
+export default function Header() {
   return (
     <header>
       <div>

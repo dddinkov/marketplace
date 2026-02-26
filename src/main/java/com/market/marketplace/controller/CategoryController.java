@@ -2,7 +2,9 @@ package com.market.marketplace.controller;
 
 import com.market.marketplace.dto.CategoryRequest;
 import com.market.marketplace.dto.CategoryResponse;
+import com.market.marketplace.dto.ProductResponse;
 import com.market.marketplace.model.Category;
+import com.market.marketplace.model.Product;
 import com.market.marketplace.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +20,8 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @GetMapping("/{categoryId}")
-    public ResponseEntity<CategoryResponse> getProduct(@PathVariable Long id) {
-        Category category = categoryService.getCategoryById(id);
+    public ResponseEntity<CategoryResponse> getCategory(@PathVariable Long categoryId) {
+        Category category = categoryService.getCategoryById(categoryId);
         CategoryResponse response = CategoryResponse.from(category);
         return ResponseEntity.ok(response);
     }
@@ -45,5 +47,12 @@ public class CategoryController {
                 categories.stream()
                         .map(CategoryResponse::from)
                         .collect(Collectors.toList()));
+    }
+
+    @GetMapping("/{categoryId}/products")
+    public ResponseEntity<List<ProductResponse>> getCategoryProducts(@PathVariable Long categoryId) {
+        List<Product> products = categoryService.getProductsByCategory(categoryId);
+        List<ProductResponse> response = products.stream().map(ProductResponse::from).collect(Collectors.toList());
+        return ResponseEntity.ok(response);
     }
 }

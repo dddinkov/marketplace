@@ -3,15 +3,7 @@ import ProductCard from "./ProductCard";
 import { fetchProducts } from "../api/products.js";
 import "../styles/ProductList.css";
 
-export default function ProductList() {
-    const [products, setProducts] = useState([]);
-
-    useEffect(() => {
-        fetchProducts()
-            .then(setProducts)
-            .catch(err => console.error("Failed to fetch products", err));
-    }, []);
-
+export default function ProductList({products}) {
     return (
         <div className="product-container">
             <div className="product-grid">

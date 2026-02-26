@@ -32,12 +32,26 @@ export async function getCategory(categoryId) {
 export async function getCategories() {
     const response = await fetch(`${API_URL}/category/all`, {
         method: "GET",
-        headers: authHeaders()
+        headers: headers()
     }
 )
     if (!response.ok) {
         const error = await response.json();
         throw new Error(error.message || "Failed to fetch categories");
+    }
+
+    return response.json();
+}
+
+export async function getCategoryProducts(categoryId) {
+    const response = await fetch(`${API_URL}/category/${categoryId}/products`, {
+        method: "GET",
+        headers: headers()
+    });
+
+    if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || "Failed to fetch products");
     }
 
     return response.json();

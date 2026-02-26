@@ -1,6 +1,7 @@
 package com.market.marketplace.service;
 
 import com.market.marketplace.exception.ProductNotFoundException;
+import com.market.marketplace.model.Category;
 import com.market.marketplace.model.Product;
 import com.market.marketplace.repository.ProductRepository;
 import jakarta.transaction.Transactional;

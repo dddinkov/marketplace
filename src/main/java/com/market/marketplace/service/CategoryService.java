@@ -3,7 +3,9 @@ package com.market.marketplace.service;
 import com.market.marketplace.dto.CategoryRequest;
 import com.market.marketplace.exception.CategoryNotFoundException;
 import com.market.marketplace.model.Category;
+import com.market.marketplace.model.Product;
 import com.market.marketplace.repository.CategoryRepository;
+import com.market.marketplace.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CategoryService {
     private final CategoryRepository categoryRepository;
+    private final ProductRepository productRepository;
 
     public Category getCategoryById(Long id) {
         return categoryRepository.findById(id).orElseThrow(CategoryNotFoundException::new);
@@ -27,5 +30,9 @@ public class CategoryService {
 
     public List<Category> getAllCategories() {
         return categoryRepository.findAll();
+    }
+
+    public List<Product> getProductsByCategory(Long categoryId) {
+        return productRepository.findByCategoryId(categoryId);
     }
 }

@@ -46,14 +46,16 @@
 }
 
 .register-container input {
-    width: 90%;
-    padding: 8px;
-    font-size: 16px;
-    margin-bottom: 15px;
-    background-color: var(--color-bg-input);
-    border: 1px solid var(--color-border-input);
+    width: 95%;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 2px solid #dc3545;
+    background-color: black;
     color: var(--color-text-primary);
-    border-radius: 4px;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
 }
 
 .register-container input::placeholder {

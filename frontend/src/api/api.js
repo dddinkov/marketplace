@@ -18,7 +18,7 @@ export function authHeaders() {
 export async function registerUser(email, password) {
     const response = await fetch(`${API_URL}/auth/register`, {
         method: "POST",
-        headers: authHeaders(),
+        headers: headers(),
         body: JSON.stringify({email, password})
     });
 

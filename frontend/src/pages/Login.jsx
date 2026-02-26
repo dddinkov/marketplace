@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { loginUser } from "../api/api.js";
 import "../styles/Login.css";
 import {useNavigate} from "react-router-dom";
@@ -69,6 +69,9 @@ export default function Login() {
                 <button type="submit" disabled={loading}>
                     {loading ? "Logging in..." : "Login"}
                 </button>
+                <p className="login-message">
+                    Don't have an account? <a href="/register">Register here</a>
+                </p>
             </form>
         </div>
     );

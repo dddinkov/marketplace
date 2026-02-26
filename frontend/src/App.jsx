@@ -8,18 +8,20 @@ import Header from "./pages/Header";
 import MyProfile from "./pages/MyProfile.jsx";
 import ProtectedRoute from "./pages/ProtectedRoute.jsx";
 import AddCategory from "./pages/AddCategory.jsx";
+import ProductPage from "./pages/ProductPage.jsx";
 
 export const routes = [
     // public routes
     { path: "/login", element: <Login /> },
     { path: "/register", element: <Register /> },
+    { path: "/", element: <Home />, protected: true },
 
     // protected routes
     { path: "/me", element: <MyProfile />, protected: true },
-    { path: "/", element: <Home />, protected: true },
     { path: "/cart", element: <Cart />, protected: true },
     { path: "/product/add", element: <AddProduct />, protected: true },
-    { path: "/category/add", element: <AddCategory />}
+    { path: "/category/add", element: <AddCategory />},
+    { path: "/product/:productId", element: <ProductPage />, protected: true},
 ];
 
 export default function App() {

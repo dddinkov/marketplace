@@ -1,6 +1,7 @@
-import { useState } from "react";
-import { registerUser } from "../api/api.js";
+import React, { useState } from "react";
+import { registerUser, loginUser } from "../api/api.js";
 import "../styles/Register.css";
+import {useNavigate} from "react-router-dom";
 
 export default function Register() {
     const [email, setEmail] = useState("");
@@ -9,6 +10,9 @@ export default function Register() {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
+
+
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -24,6 +28,9 @@ export default function Register() {
 
         try {
             await registerUser(email, password);
+            const data = await loginUser(email, password);
+            localStorage.setItem("token", data.token);
+            navigate("/");
             setSuccess(true);
             setEmail("");
             setPassword("");
@@ -74,6 +81,9 @@ export default function Register() {
                 <button type="submit" disabled={loading}>
                     {loading ? "Registering..." : "Register"}
                 </button>
+                <p className="login-message">
+                    Already have an account? <a href="/login">Login here</a>
+                </p>
             </form>
         </div>
     );

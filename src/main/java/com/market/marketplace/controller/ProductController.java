@@ -24,6 +24,14 @@ public class ProductController {
     private final CurrentUserService currentUserService;
     private final CategoryService categoryService;
 
+    @GetMapping("/{productId}")
+    public ResponseEntity<ProductResponse> getProductById(@PathVariable Long productId) {
+        Product product = productService.getProduct(productId);
+        ProductResponse response = ProductResponse.from(product);
+
+        return ResponseEntity.ok(response);
+    }
+
     @PostMapping
     public ResponseEntity<ProductResponse> addProduct(@Valid @RequestBody ProductRequest request) {
         User user = currentUserService.getRequiredUser();

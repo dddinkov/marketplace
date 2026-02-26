@@ -34,3 +34,14 @@ export async function fetchProducts() {
     });
     return response.json();
 }
+
+export async function fetchProductById(productId) {
+    const response = await fetch(`${API_URL}/products/${productId}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
+    });
+    return response.json();
+}

@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { fetchCart } from "../api/cart";
-import {cartEvent} from "../events/cartEvent.js";
 import "../styles/MiniCart.css";
 import { Link } from "react-router-dom";
 
@@ -12,6 +11,7 @@ export default function MiniCart() {
                 const data = await fetchCart();
                 setItemCount(data.items.reduce((total, item) => total + item.quantity, 0));
             } catch (err) {
+                setItemCount(0);
             }
         };
 

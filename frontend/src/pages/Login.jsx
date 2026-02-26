@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { loginUser } from "../api/api.js"; // make sure this is the function we wrote earlier
+import { loginUser } from "../api/api.js";
 import "../styles/Login.css";
-import {useNavigate} from "react-router-dom"; // optional styling
+import {useNavigate} from "react-router-dom";
+import {triggerCartUpdate} from "../events/cartEvent.js";
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -25,6 +26,8 @@ export default function Login() {
             setSuccess(true);
             setEmail("");
             setPassword("");
+
+            triggerCartUpdate();
 
             navigate("/");
         } catch (err) {

@@ -1,3 +1,5 @@
+import {triggerCartUpdate} from "../events/cartEvent.js";
+
 export const API_URL = "http://localhost:8080";
 
 export function headers() {
@@ -66,6 +68,7 @@ export async function updatePassword(userId, newPassword) {
 
 export async function logout() {
     localStorage.removeItem("token");
+    triggerCartUpdate();
 }
 
 export async function fetchCurrentUser() {

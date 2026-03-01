@@ -1,12 +1,9 @@
-import {API_URL} from "./api.js";
+import {API_URL, authHeaders, headers} from "./api.js";
 
 export async function addProduct(name, description, price, imageUrl, categoryId) {
     const response = await fetch(`${API_URL}/products`, {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("token")}`
-        },
+        headers: authHeaders(),
         body: JSON.stringify({
             name,
             description,
@@ -27,10 +24,7 @@ export async function addProduct(name, description, price, imageUrl, categoryId)
 export async function fetchProducts() {
     const response = await fetch(`${API_URL}/products`, {
         method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("token")}`
-        }
+        headers: headers()
     });
     return response.json();
 }
@@ -38,10 +32,7 @@ export async function fetchProducts() {
 export async function fetchProductById(productId) {
     const response = await fetch(`${API_URL}/products/${productId}`, {
         method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("token")}`
-        }
+        headers: authHeaders()
     });
     return response.json();
 }

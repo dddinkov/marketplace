@@ -1,17 +1,14 @@
-import { API_URL } from "./api.js";
+import {API_URL, authHeaders} from "./api.js";
 
 export async function addToCart(productId, quantity = 1) {
     const response = await fetch(`${API_URL}/cart/items`, {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("token")}`
-        },
+        headers: authHeaders(),
         body: JSON.stringify({ productId, quantity })
     });
 
     if (!response.ok) {
-        const error = await res.json();
+        const error = await response.json();
         throw new Error(error.message || "Failed to add item to cart");
     }
 

@@ -14,13 +14,13 @@ export const routes = [
     // public routes
     { path: "/login", element: <Login /> },
     { path: "/register", element: <Register /> },
-    { path: "/", element: <Home />, protected: true },
+    { path: "/", element: <Home /> },
 
     // protected routes
     { path: "/me", element: <MyProfile />, protected: true },
     { path: "/cart", element: <Cart />, protected: true },
     { path: "/product/add", element: <AddProduct />, protected: true },
-    { path: "/category/add", element: <AddCategory />},
+    { path: "/category/add", element: <AddCategory />, protected: true },
     { path: "/product/:productId", element: <ProductPage />, protected: true},
 ];
 

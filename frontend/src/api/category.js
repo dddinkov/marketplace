@@ -18,7 +18,7 @@ export async function addCategory(name) {
 export async function getCategory(categoryId) {
     const response = await fetch(`${API_URL}/category/${categoryId}`, {
         method: "GET",
-        headers: authHeaders()
+        headers: headers()
     });
 
     if (!response.ok) {

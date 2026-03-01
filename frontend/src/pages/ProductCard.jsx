@@ -2,10 +2,14 @@ import React from "react";
 import {addToCart} from "../api/cart.js";
 import {triggerCartUpdate} from "../events/cartEvent";
 import "../styles/ProductCard.css";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 export default function ProductCard({ product }) {
+    const navigate = useNavigate();
     const handleAdd = async () => {
+        if (localStorage.getItem("token") === null) {
+            navigate("/login");
+        }
         try {
             await addToCart(product.id, 1);
             triggerCartUpdate();

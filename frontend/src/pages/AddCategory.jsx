@@ -31,7 +31,7 @@ export default function CategoryForm() {
 
     return (
         <div className="category-form-container">
-            <h2>Add New Category</h2>
+            <h2 className="title">Add New Category</h2>
 
             {success && <p style={{ color: "green" }}>Product added successfully!</p>}
             {error && <p style={{ color: "red" }}>{error}</p>}

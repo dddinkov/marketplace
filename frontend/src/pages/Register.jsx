@@ -44,8 +44,7 @@ export default function Register() {
 
     return (
         <div className="register-container">
-            <h2>Registration Form</h2>
-            {success && <p>Registration successful! You can now log in.</p>}
+            <h2 className="title">Registration Form</h2>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="email">Email</label>
                 <input
@@ -77,7 +76,7 @@ export default function Register() {
                     required
                     disabled={loading}
                 />
-                {error && <p>{error}</p>}
+                {error && <p className="error">{error}</p>}
                 <button type="submit" disabled={loading}>
                     {loading ? "Registering..." : "Register"}
                 </button>

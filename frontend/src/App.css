@@ -1,37 +1,44 @@
+:root {
+    /* Backgrounds */
+    --color-bg-primary: #F8F6F1;
+    --color-bg-secondary: #E6E1D8;
+    --color-bg-input: black;
 
+    /* Primary Accent (Luxury Beige) */
+    --color-primary: #C6A96B;
+    --color-primary-hover: #B89555;
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+    /* Borders */
+    --color-border-primary: #D6D0C4;
+    --color-border-input: #CFC8BA;
+
+    /* Text */
+    --color-text-primary: #2F2E2B;
+    --color-text-muted: #6E6A63;
+    --color-text-placeholder: #9A948A;
+    --color-text-input: #c6a96b;
+
+    /* Errors */
+    --color-error: #B23A3A;
+
+    /* Header */
+    --color-header-bg: #2F2E2B;
+    --color-header-text: #F4F1EA;
+    --color-header-link-hover: #C6A96B;
+
+    /* Success Notification */
+    --color-success-bg: #b1ffc6;
+    --color-success-text: #2f2e2b;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+body {
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+.error {
+    color: var(--color-error);
+    font-weight: 600;
 }

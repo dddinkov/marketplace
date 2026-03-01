@@ -1,9 +1,13 @@
+h1 {
+    color: var(--color-primary);
+}
+
 form {
     display: flex;
     flex-direction: column;
     padding: 15px;
     border-radius: 25px;
-    background-color: var(--color-bg-primary);   /* dark container */
+    background-color: var(--color-bg-secondary);
     color: var(--color-text-primary);
     gap: 1rem;
     max-width: 400px;
@@ -23,9 +27,9 @@ form input,
 form textarea {
     padding: 10px 12px;
     border-radius: 12px;
-    border: 2px solid #dc3545; /* Bootstrap-ish red */
+    border: 2px solid var(--color-border-primary);
     background-color: black;
-    color: var(--color-text-primary);
+    color: var(--color-text-input);
     font-size: 0.95rem;
     outline: none;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;

@@ -61,7 +61,7 @@ export default function ProductPage() {
 
             <div className="product-details-container">
                 <h1>{product.name}</h1>
-                <p className="product-price">${product.price}</p>
+                <p className="product-price">${Number(product.price).toFixed(2)}</p>
                 <p className="product-description">{product.description}</p>
 
                 <div className="quantity-selector">

@@ -30,8 +30,8 @@ export default function ProductCard({ product }) {
             <img src={product.imageUrl} alt={product.name} className="mb-2" width="250px" height="250px"/>
             </Link>
             <h3 className="font-bold">{product.name}</h3>
-            <p>{product.description}</p>
-            <p className="price">${product.price}</p>
+            <p className="product-description">{product.description}</p>
+            <p className="price">${Number(product.price).toFixed(2)}</p>
             <button
                 className="mt-2 bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600"
                 onClick={handleAdd}

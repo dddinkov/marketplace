@@ -39,10 +39,7 @@ export default function Login() {
 
     return (
         <div className="login-container">
-            <h2>Login</h2>
-            {success && <p style={{ color: "green" }}>Login successful!</p>}
-            {error && <p style={{ color: "red" }}>{error}</p>}
-
+            <h2 className="title">Login</h2>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="email">Email</label>
                 <input
@@ -65,6 +62,8 @@ export default function Login() {
                     required
                     disabled={loading}
                 />
+
+                {error && <p style={{ color: "red" }}>{error}</p>}
 
                 <button type="submit" disabled={loading}>
                     {loading ? "Logging in..." : "Login"}

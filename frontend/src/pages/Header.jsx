@@ -6,9 +6,9 @@ import "../styles/Header.css";
 export default function Header() {
   return (
     <header>
-      <div>
+      <h3>
         Marketplace
-      </div>
+      </h3>
       <nav>
           <Link className="link" to="/">Home</Link>
 

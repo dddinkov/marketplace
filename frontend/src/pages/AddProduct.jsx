@@ -63,7 +63,7 @@ export default function ProductForm() {
 
     return (
         <div className="product-form-container">
-            <h2>Add New Product</h2>
+            <h2 className="title">Add New Product</h2>
 
             {success && <p style={{ color: "green" }}>Product added successfully!</p>}
             {error && <p style={{ color: "red" }}>{error}</p>}

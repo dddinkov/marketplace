@@ -10,7 +10,7 @@
     position: absolute;
     top: 11px;
     right: -8px;
-    background-color: #666;
+    background-color: var(--color-primary);
     color: white;
     border-radius: 50%;
     width: 20px;

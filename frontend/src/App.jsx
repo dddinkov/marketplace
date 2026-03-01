@@ -9,6 +9,7 @@ import MyProfile from "./pages/MyProfile.jsx";
 import ProtectedRoute from "./pages/ProtectedRoute.jsx";
 import AddCategory from "./pages/AddCategory.jsx";
 import ProductPage from "./pages/ProductPage.jsx";
+import "./App.css";
 
 export const routes = [
     // public routes

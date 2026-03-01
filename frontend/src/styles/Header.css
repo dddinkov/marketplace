@@ -3,22 +3,24 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: #dc3545;
-  border-bottom: 1px solid #c82333;
+  background-color: var(--color-header-bg);
+  border-bottom: 2px solid var(--color-header-text);
   position: sticky;
   top: 0;
   z-index: 1000;
 }
 
-header .mini-cart-container {
-  position: relative;
+header h3 {
+  color: var(--color-text-placeholder)
 }
 
 header .link {
-  margin: 8px;
-  color: white;
+  color: var(--color-header-text);
+  text-decoration: none;
+  margin: 0 8px;
+  transition: color 0.3s ease;
 }
 
 header .link:hover {
-  color: rgb(214, 164, 164);
+  color: var(--color-header-link-hover);
 }

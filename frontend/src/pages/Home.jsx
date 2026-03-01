@@ -11,6 +11,10 @@ export default function Home() {
 
     const [categories, setCategories] = useState([]);
     const [products, setProducts] = useState([]);
+    const [page, setPage] = useState(0);
+    const [totalPages, setTotalPages] = useState(0);
+    const [selectedCategory, setSelectedCategory] = useState("");
+    const size = 12;
 
     useEffect(() => {
         const loadCategories = async () => {
@@ -22,20 +26,29 @@ export default function Home() {
     }, []);
 
     useEffect(() => {
-        fetchProducts()
-            .then(setProducts)
-            .catch(err => console.error("Failed to fetch products", err));
-    }, []);
+        loadProducts();
+        }, [page, selectedCategory]);
+
+    const loadProducts = async () => {
+        try {
+            let data;
+
+            if (!selectedCategory) {
+                data = await fetchProducts(page, size);
+            } else {
+                data = await getCategoryProducts(selectedCategory, page, size);
+            }
+
+            setProducts(data.content);      // VERY IMPORTANT
+            setTotalPages(data.totalPages); // store total pages
+        } catch (err) {
+            console.error("Failed to fetch products", err);
+        }
+    };
 
     const handleCategoryChange = async (categoryId) => {
-        if (!categoryId) {
-            fetchProducts()
-                .then(setProducts)
-                .catch(err => console.error("Failed to fetch products", err));
-            return;
-        }
-        const products = await getCategoryProducts(categoryId);
-        setProducts(products);
+        setSelectedCategory(categoryId);
+        setPage(0);
     }
     return (
         <div className="container">
@@ -51,6 +64,25 @@ export default function Home() {
                 </select>
             )}
             <ProductList products={products} />
+            <div style={{ marginTop: "20px" }}>
+                <button
+                    disabled={page === 0}
+                    onClick={() => setPage((prev) => prev - 1)}
+                >
+                    Previous
+                </button>
+
+                <span style={{ margin: "0 10px" }}>
+                    Page {page + 1} of {totalPages}
+                </span>
+
+                <button
+                    disabled={page + 1 >= totalPages}
+                    onClick={() => setPage((prev) => prev + 1)}
+                >
+                    Next
+                </button>
+            </div>
         </div>
 
     );

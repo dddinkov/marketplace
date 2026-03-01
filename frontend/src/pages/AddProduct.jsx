@@ -64,10 +64,6 @@ export default function ProductForm() {
     return (
         <div className="product-form-container">
             <h2 className="title">Add New Product</h2>
-
-            {success && <p style={{ color: "green" }}>Product added successfully!</p>}
-            {error && <p style={{ color: "red" }}>{error}</p>}
-
             <form onSubmit={handleSubmit}>
                 <label htmlFor="name">Product Name</label>
                 <input
@@ -129,6 +125,9 @@ export default function ProductForm() {
                         ))
                     )}
                 </select>
+
+                {success && <p style={{ color: "green" }}>Product added successfully!</p>}
+                {error && <p style={{ color: "red" }}>{error}</p>}
 
                 <button type="submit" disabled={loading}>
                     {loading ? "Adding..." : "Add Product"}

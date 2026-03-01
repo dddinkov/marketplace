@@ -7,6 +7,8 @@ import com.market.marketplace.model.Product;
 import com.market.marketplace.repository.CategoryRepository;
 import com.market.marketplace.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,7 +34,7 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
-    public List<Product> getProductsByCategory(Long categoryId) {
-        return productRepository.findByCategoryId(categoryId);
+    public Page<Product> getProductsByCategory(Long categoryId, Pageable pageable) {
+        return productRepository.findByCategoryId(categoryId, pageable);
     }
 }

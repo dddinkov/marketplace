@@ -54,4 +54,8 @@ public class CartItem {
     public void incrementQuantity(int amount) {
         this.quantity += amount;
     }
+
+    public void decrementQuantity(int amount) {
+        this.quantity -= amount;
+    }
 }

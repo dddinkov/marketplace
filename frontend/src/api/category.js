@@ -43,8 +43,8 @@ export async function getCategories() {
     return response.json();
 }
 
-export async function getCategoryProducts(categoryId) {
-    const response = await fetch(`${API_URL}/category/${categoryId}/products`, {
+export async function getCategoryProducts(categoryId, page = 0, size = 12) {
+    const response = await fetch(`${API_URL}/category/${categoryId}/products?page=${page}&size=${size}`, {
         method: "GET",
         headers: headers()
     });

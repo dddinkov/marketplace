@@ -7,6 +7,9 @@ import com.market.marketplace.model.Category;
 import com.market.marketplace.model.Product;
 import com.market.marketplace.service.CategoryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,9 +53,13 @@ public class CategoryController {
     }
 
     @GetMapping("/{categoryId}/products")
-    public ResponseEntity<List<ProductResponse>> getCategoryProducts(@PathVariable Long categoryId) {
-        List<Product> products = categoryService.getProductsByCategory(categoryId);
-        List<ProductResponse> response = products.stream().map(ProductResponse::from).collect(Collectors.toList());
-        return ResponseEntity.ok(response);
+    public Page<ProductResponse> getProductsByCategory(
+            @PathVariable Long categoryId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "12") int size
+            ) {
+        Pageable pageable = PageRequest.of(page, size);
+        return categoryService.getProductsByCategory(categoryId, pageable)
+                .map(ProductResponse::from);
     }
 }

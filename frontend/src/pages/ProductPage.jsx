@@ -11,6 +11,8 @@ export default function ProductPage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [quantity, setQuantity] = useState(1);
+    const [showSuccess, setShowSuccess] = useState(false);
+    const [successMessage, setSuccessMessage] = useState("");
 
     useEffect(() => {
         async function loadProduct() {
@@ -31,10 +33,16 @@ export default function ProductPage() {
         try {
             await addToCart(product.id, quantity);
             triggerCartUpdate();
-            alert(`${quantity} ${product.name}(s) added to cart`);
+
+            setShowSuccess(true);
+            setSuccessMessage(`${quantity} ${product.name}(s) added to cart`);
+            setTimeout(() => {
+                setShowSuccess(false);
+                setSuccessMessage("");
+            }, 2000);
             setQuantity(1);
         } catch (err) {
-            alert("Failed to add product to cart.");
+            console.error("Failed to add product to cart.");
         }
     };
 
@@ -61,6 +69,12 @@ export default function ProductPage() {
                     <span>{quantity}</span>
                     <button onClick={increaseQuantity}>+</button>
                 </div>
+
+                {showSuccess && (
+                    <div className="success-popup">
+                        {successMessage}
+                    </div>
+                )}
 
                 <button onClick={handleAddToCart}>Add to Cart</button>
             </div>

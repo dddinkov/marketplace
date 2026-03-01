@@ -1,18 +1,24 @@
-import React from "react";
+import React, {useState} from "react";
 import {addToCart} from "../api/cart.js";
 import {triggerCartUpdate} from "../events/cartEvent";
 import "../styles/ProductCard.css";
 import {Link, useNavigate} from "react-router-dom";
 
 export default function ProductCard({ product }) {
+    const [showSuccess, setShowSuccess] = useState(false);
+
     const navigate = useNavigate();
     const handleAdd = async () => {
         if (localStorage.getItem("token") === null) {
             navigate("/login");
+            return;
         }
         try {
             await addToCart(product.id, 1);
             triggerCartUpdate();
+
+            setShowSuccess(true);
+            setTimeout(() => setShowSuccess(false), 2000);
         } catch (err) {
             console.error("Failed to add to cart:", err);
         }
@@ -32,6 +38,11 @@ export default function ProductCard({ product }) {
             >
                 Add to Cart
             </button>
+            {showSuccess && (
+                <div className="success-popup">
+                    Item added successfully!
+                </div>
+            )}
         </div>
     )
 }

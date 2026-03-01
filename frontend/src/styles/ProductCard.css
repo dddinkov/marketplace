@@ -54,5 +54,23 @@
     transform: translateY(-3px);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
 
+.success-popup {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #16a34a;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    animation: fadeInOut 2s ease-in-out;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(10px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; }
+    100% { opacity: 0; }
 }

@@ -9,10 +9,10 @@ import com.market.marketplace.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,16 +21,25 @@ public class OrderController {
     private final OrderService orderService;
     private final CurrentUserService currentUserService;
 
-    @PostMapping("/add")
-    public ResponseEntity<OrderResponse> addOrder(@RequestBody OrderRequest orderRequest) {
+    @PostMapping("/checkout")
+    public ResponseEntity<OrderResponse> checkout(@RequestBody OrderRequest request) {
         User user = currentUserService.getRequiredUser();
-        Order order = Order.from(orderRequest, user);
 
-        order = orderService.addOrder(order);
+        Order order = orderService.checkout(user, request);
 
         OrderResponse response = OrderResponse.from(order);
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(response);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<OrderResponse>> getUserOrders() {
+        User user = currentUserService.getRequiredUser();
+        List<OrderResponse> orders = orderService.getOrdersByUser(user).stream()
+                .map(OrderResponse::from)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(orders);
     }
 }

@@ -7,26 +7,18 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-    @ExceptionHandler(EmailAlreadyUsedException.class)
-    public ResponseEntity<String> handleEmailAlreadyUsed(EmailAlreadyUsedException ex) {
+
+    // 409
+    @ExceptionHandler({EmailAlreadyUsedException.class, InvalidPasswordException.class, EmptyCartException.class})
+    public ResponseEntity<String> handleConflictException(RuntimeException ex) {
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(ex.getMessage());
     }
 
-    @ExceptionHandler(InvalidPasswordException.class)
-    public ResponseEntity<String> handleInvalidPassword(InvalidPasswordException ex) {
-        return ResponseEntity.status(HttpStatus.CONFLICT)
-                .body(ex.getMessage());
-    }
 
-    @ExceptionHandler(UserNotFoundException.class)
-    ResponseEntity<String> handleUserNotFound(UserNotFoundException ex) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(ex.getMessage());
-    }
-
-    @ExceptionHandler(ProductNotFoundException.class)
-    ResponseEntity<String> handleProductNotFound(ProductNotFoundException ex) {
+    // 404
+    @ExceptionHandler({ProductNotFoundException.class, UserNotFoundException.class, CategoryNotFoundException.class})
+    ResponseEntity<String> handleNotFoundException(RuntimeException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(ex.getMessage());
     }

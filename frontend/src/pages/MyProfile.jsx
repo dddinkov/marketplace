@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchCurrentUser, updateUser, logout, loginUser } from "../api/api.js";
 import "../styles/MyProfile.css";
+import Orders from "./Order.jsx";
 
 export default function MyProfile() {
     const navigate = useNavigate();
@@ -126,6 +127,8 @@ export default function MyProfile() {
                     {loading ? "Updating..." : "Update Profile"}
                 </button>
             </form>
+
+            <Orders />
 
             <button
                 onClick={handleLogout}

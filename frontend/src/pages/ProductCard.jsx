@@ -27,7 +27,7 @@ export default function ProductCard({ product }) {
     return (
         <div className="product-card">
             <Link to={`/product/${product.id}`}>
-            <img src={product.imageUrl} alt={product.name} className="mb-2" width="250px" height="250px" loading="lazy"/>
+            <img src={`${product.imageUrl}?auto=compress&cs=tinysrgb&w=200`} alt={product.name} className="mb-2" width="250px" height="250px" loading="lazy"/>
             </Link>
             <h3 className="font-bold">{product.name}</h3>
             <p className="product-description">{product.description}</p>

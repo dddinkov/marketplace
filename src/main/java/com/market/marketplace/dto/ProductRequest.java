@@ -5,12 +5,14 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import org.hibernate.validator.constraints.URL;
 
+import java.math.BigDecimal;
+
 public record ProductRequest(
         @NotBlank
         String name,
         String description,
         @NotNull @Positive
-        Double price,
+        BigDecimal price,
         @URL
         String imageUrl,
         @NotNull

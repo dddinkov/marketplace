@@ -82,3 +82,61 @@ button:hover {
 .cart-summary strong {
   color: var(--color-text-primary);
 }
+
+.clear-cart-btn,
+.checkout-cart-btn {
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease-in-out;
+  min-width: 140px;
+  margin: 15px;
+}
+
+.checkout-form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 10;
+}
+
+.checkout-form {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  text-align: left;
+}
+
+.address-input {
+  width: 95%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 2px solid var(--color-border-primary);
+  background-color: var(--color-bg-input);
+  color: var(--color-text-input);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+}
+
+.cancel-checkout-btn, .confirm-checkout-btn {
+  margin-left: 15px;
+}
+

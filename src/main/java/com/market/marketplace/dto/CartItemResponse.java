@@ -2,11 +2,13 @@ package com.market.marketplace.dto;
 
 import com.market.marketplace.model.CartItem;
 
+import java.math.BigDecimal;
+
 public record CartItemResponse(
         Long id,
         Long productId,
         String productName,
-        Double productPrice,
+        BigDecimal productPrice,
         String imageUrl,
         Integer quantity
 ) {

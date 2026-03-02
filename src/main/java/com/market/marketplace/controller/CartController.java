@@ -55,4 +55,11 @@ public class CartController {
 
         return ResponseEntity.noContent().build();
     }
+
+    @DeleteMapping
+    public ResponseEntity<Void> clearCart() {
+        User user = currentUserService.getRequiredUser();
+        cartService.clearCart(user);
+        return ResponseEntity.noContent().build();
+    }
 }

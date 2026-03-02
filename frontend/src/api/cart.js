@@ -16,13 +16,9 @@ export async function addToCart(productId, quantity = 1) {
 }
 
 export async function fetchCart() {
-
     const response = await fetch(`${API_URL}/cart`, {
         method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("token")}`,
-        },
+        headers: authHeaders(),
     });
 
     if (!response.ok) {
@@ -49,4 +45,31 @@ export async function deleteFromCart(itemId) {
     if (!response.ok) {
         throw new Error("Failed to delete cart item");
     }
+}
+
+export async function clearCart() {
+    const response = await fetch(`${API_URL}/cart`, {
+        method: "DELETE",
+        headers: authHeaders(),
+    });
+
+    if (!response.ok) {
+        throw new Error("Failed to fetch cart");
+    }
+
+    return;
+}
+
+export async function checkoutCart(address) {
+    const response = await fetch(`${API_URL}/orders/checkout`, {
+        method: "POST",
+        headers: authHeaders(),
+        body: JSON.stringify({ address })
+    });
+
+    if (!response.ok) {
+        throw new Error("Checkout failed");
+    }
+
+    return;
 }

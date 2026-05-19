@@ -6,6 +6,7 @@ import com.market.marketplace.dto.ProductResponse;
 import com.market.marketplace.model.Category;
 import com.market.marketplace.model.Product;
 import com.market.marketplace.service.CategoryService;
+import com.market.marketplace.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 @RequestMapping("category")
 public class CategoryController {
     private final CategoryService categoryService;
+    private final ProductService productService;
 
     @GetMapping("/{categoryId}")
     public ResponseEntity<CategoryResponse> getCategory(@PathVariable Long categoryId) {
@@ -59,7 +61,7 @@ public class CategoryController {
             @RequestParam(defaultValue = "12") int size
             ) {
         Pageable pageable = PageRequest.of(page, size);
-        return categoryService.getProductsByCategory(categoryId, pageable)
+        return productService.getProductsByCategory(categoryId, pageable)
                 .map(ProductResponse::from);
     }
 }

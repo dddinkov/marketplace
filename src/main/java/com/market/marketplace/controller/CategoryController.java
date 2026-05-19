@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("category")
+@RequestMapping("categories")
 public class CategoryController {
     private final CategoryService categoryService;
     private final ProductService productService;
@@ -31,7 +31,7 @@ public class CategoryController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public ResponseEntity<CategoryResponse> addCategory(@RequestBody CategoryRequest request) {
         Category category = categoryService.addCategory(request);
         CategoryResponse response = CategoryResponse.from(category);
@@ -39,14 +39,9 @@ public class CategoryController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<List<CategoryResponse>> getAllCategories() {
         List<Category> categories = categoryService.getAllCategories();
-        System.out.println(categories.toString());
-
-        if(categories.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
 
         return ResponseEntity.ok(
                 categories.stream()
@@ -55,13 +50,13 @@ public class CategoryController {
     }
 
     @GetMapping("/{categoryId}/products")
-    public Page<ProductResponse> getProductsByCategory(
+    public ResponseEntity<Page<ProductResponse>> getProductsByCategory(
             @PathVariable Long categoryId,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "12") int size
             ) {
         Pageable pageable = PageRequest.of(page, size);
-        return productService.getProductsByCategory(categoryId, pageable)
-                .map(ProductResponse::from);
+        return ResponseEntity.ok(productService.getProductsByCategory(categoryId, pageable)
+                .map(ProductResponse::from));
     }
 }

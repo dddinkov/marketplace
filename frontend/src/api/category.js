@@ -1,7 +1,9 @@
 import {API_URL, authHeaders, headers} from "./api.js";
 
+const CATEGORY_API_URL = `${API_URL}/categories`;
+
 export async function addCategory(name) {
-    const response = await fetch(`${API_URL}/category/add`, {
+    const response = await fetch(`${CATEGORY_API_URL}`, {
         method: "POST",
         headers: authHeaders(),
         body: JSON.stringify({ name })
@@ -16,7 +18,7 @@ export async function addCategory(name) {
 }
 
 export async function getCategory(categoryId) {
-    const response = await fetch(`${API_URL}/category/${categoryId}`, {
+    const response = await fetch(`${CATEGORY_API_URL}/${categoryId}`, {
         method: "GET",
         headers: headers()
     });
@@ -30,7 +32,7 @@ export async function getCategory(categoryId) {
 }
 
 export async function getCategories() {
-    const response = await fetch(`${API_URL}/category/all`, {
+    const response = await fetch(`${CATEGORY_API_URL}`, {
         method: "GET",
         headers: headers()
     }
@@ -44,7 +46,7 @@ export async function getCategories() {
 }
 
 export async function getCategoryProducts(categoryId, page = 0, size = 12) {
-    const response = await fetch(`${API_URL}/category/${categoryId}/products?page=${page}&size=${size}`, {
+    const response = await fetch(`${CATEGORY_API_URL}/${categoryId}/products?page=${page}&size=${size}`, {
         method: "GET",
         headers: headers()
     });

@@ -2,16 +2,16 @@ package com.market.marketplace.model;
 
 import com.market.marketplace.dto.ProductRequest;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
+@Builder
 @Table(name = "products")
 public class Product {
     @Id

@@ -18,7 +18,7 @@ public class CategoryRepositoryTests {
     CategoryRepository categoryRepository;
 
     @Test
-    public void Save_ReturnSavedCategory() {
+    void Save_ReturnSavedCategory() {
         Category category = Category.builder()
                 .name("Category")
                 .build();
@@ -31,7 +31,7 @@ public class CategoryRepositoryTests {
     }
 
     @Test
-    public void FindById_ReturnCategory() {
+    void FindById_ReturnCategory() {
         Category cat1 = categoryRepository.save(Category.builder().name("Electronics").build());
         Category cat2 = categoryRepository.save(Category.builder().name("Books").build());
         Category cat3 = categoryRepository.save(Category.builder().name("Toys").build());

@@ -2,23 +2,22 @@ package com.market.marketplace.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Getter
 @Setter
+@Builder
 @Table(name = "users")
 public class User implements UserDetails {
     @Id

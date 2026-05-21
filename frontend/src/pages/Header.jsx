@@ -1,28 +1,35 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import MiniCart from "./MiniCart";
 import "../styles/Header.css";
 
 export default function Header() {
-  return (
-    <header>
-      <h3>
-        Marketplace
-      </h3>
-      <nav>
-          <Link className="link" to="/">Home</Link>
+    return (
+        <header>
+            <h3>
+                Marketplace
+            </h3>
+            <nav>
+                <Link className="link" to="/">Home</Link>
 
-          <Link className="link" to="/me">My Profile</Link>
+                <Link className="link" to="/me">My Profile</Link>
 
-          <Link className="link" to="/product/add">Add Product</Link>
+                <Link className="link" to="/product/add">Add Product</Link>
 
-          <Link className="link" to="/category/add">Add Category</Link>
+                <Link className="link" to="/category/add">Add Category</Link>
 
-          <Link className="link" to="/chat">Chat</Link>
-      </nav>
-      <div className="mini-cart-container">
-        <MiniCart />
-      </div>
-    </header>
-  );
+                <Link className="link" to="/chat">Chat</Link>
+            </nav>
+            <div className="mini-cart-container">
+                <MiniCart/>
+                {!localStorage.getItem("token") && (
+                    <Link className="link button" to="/login">
+                        <button>
+                            Login
+                        </button>
+                    </Link>
+                )}
+            </div>
+        </header>
+    );
 }   

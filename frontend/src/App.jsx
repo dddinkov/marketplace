@@ -10,6 +10,7 @@ import ProtectedRoute from "./pages/ProtectedRoute.jsx";
 import AddCategory from "./pages/AddCategory.jsx";
 import ProductPage from "./pages/ProductPage.jsx";
 import "./App.css";
+import Chat from "./pages/Chat.jsx";
 
 export const routes = [
     // public routes
@@ -23,6 +24,7 @@ export const routes = [
     { path: "/product/add", element: <AddProduct />, protected: true },
     { path: "/category/add", element: <AddCategory />, protected: true },
     { path: "/product/:productId", element: <ProductPage />, protected: true},
+    { path: "/chat", element: <Chat />, protected: true},
 ];
 
 export default function App() {

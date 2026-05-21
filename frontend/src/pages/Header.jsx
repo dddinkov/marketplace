@@ -17,6 +17,8 @@ export default function Header() {
           <Link className="link" to="/product/add">Add Product</Link>
 
           <Link className="link" to="/category/add">Add Category</Link>
+
+          <Link className="link" to="/chat">Chat</Link>
       </nav>
       <div className="mini-cart-container">
         <MiniCart />
